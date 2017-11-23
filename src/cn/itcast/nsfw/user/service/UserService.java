@@ -16,6 +16,8 @@ public interface UserService extends BaseService<User>{
 	//基础的增删改查都继承公共接口BaseService<T>
 	
 	
+	//GitTest
+	
 	//导出用户列表的方法
 	public void exportExcel(List<User> userlist,ServletOutputStream outputStream);
 
