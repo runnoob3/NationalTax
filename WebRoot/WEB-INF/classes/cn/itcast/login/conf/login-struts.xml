@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<!-- extends="struts-default"改为extends="base-default",测试全局异常 -->
+    <package name="login-action" namespace="/sys" extends="base-default">
+    	
+    	<!-- 通配符 -->
+    	<action name="login_*" class="cn.itcast.login.action.LoginAction" method="{1}">
+    		<!-- 通配符 -->
+    		<result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
+    		
+    		<!-- 因为LoginAction中没有定义loginUI的方法，所以单独配置 -->
+    		<result name="loginUI">/WEB-INF/jsp/loginUI.jsp</result>
+			
+			<!-- 没有权限 -->
+    		<result name="noPermissionUI">/WEB-INF/jsp/noPermissionUI.jsp</result>
+    		
+    		<!-- 登录成功 -->
+    		<result name="home" type="redirectAction">
+    			<!-- 返回home页面，默认方法，所以不需要home_execute -->
+    			<param name="actionName">home</param>
+    		</result>
+    	</action>
+    </package>
+    
+
+</struts>

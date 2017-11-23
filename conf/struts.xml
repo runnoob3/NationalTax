@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+    <!-- 禁用动态方法访问:user!add.action -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	
+	<!-- 配置成开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	
+	<!-- 配置拓展名为action: 访问页面必须加.action -->
+	<constant name="struts.action.extention" value="action" />
+	
+	<!-- 把主题配置成simple -->
+	<constant name="struts.ui.theme" value="simple" />
+    
+    
+    <!-- 配置全局结果及异常映射：用户管理模块引用时: extends="base-default" -->
+	<package name="base-default" extends="struts-default">
+		
+		<!-- 3. 配置返回结果类型 -->
+		<result-types>
+			<result-type name="error" class="cn.itcast.core.action.SysResultAction"></result-type>
+		</result-types>
+		
+		
+		<!-- 全局返回结果,对应下面: result="sysError"; result="input" -->
+		<global-results>
+			<!-- 1.自定义系统错误信息页面：error.jsp -->
+			<result name="sysError">/WEB-INF/jsp/error.jsp</result>
+
+			<!-- 2. 输入为空的异常  -->
+			<result name="sysError">/WEB-INF/jsp/error.jsp</result>
+			
+			<!-- 3. 配置返回结果类型：type="error"-->
+			<result name="error" type="error">/WEB-INF/jsp/error.jsp</result>
+			
+		</global-results>
+		
+		<!-- 全局异常映射 -->
+		<global-exception-mappings>
+			<!-- 1. 自定义系统异常 -->
+			<exception-mapping result="sysError" exception="cn.itcast.core.exception.SysException">
+			</exception-mapping>
+
+			<!-- 2. 输入为空的异常 -->
+			<exception-mapping result="input" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+	</package>
+    
+    
+    
+    <!-- 包含test的struts配置文件 -->
+    <include file="cn/itcast/test/conf/test-struts.xml"></include>
+    
+	<!-- 包含用户管理的user-struts配置文件 -->
+	<include file="cn/itcast/nsfw/user/conf/user-struts.xml"></include>
+	
+	<!-- 包含角色管理的role-struts配置文件 -->
+	<include file="cn/itcast/nsfw/role/conf/role-struts.xml"></include>
+	
+	<!-- 包含系统首页的home-struts配置文件 -->
+	<include file="cn/itcast/home/conf/home-struts.xml"></include>
+	
+	<!-- 包含纳税服务系统首页的home-struts配置文件 -->
+	<include file="cn/itcast/nsfw/home/conf/home-struts.xml"></include>
+	
+	<!-- 包含登录的login-struts配置文件 -->
+	<include file="cn/itcast/login/conf/login-struts.xml"></include>
+	
+	<!-- 包含信息发布的info-struts配置文件 -->
+	<include file="cn/itcast/nsfw/info/conf/info-struts.xml"></include>
+	
+	<!-- 包含投诉受理的complain-struts配置文件 -->
+	<include file="cn/itcast/nsfw/complain/conf/complain-struts.xml"></include>
+	
+	
+</struts>

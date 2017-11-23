@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<!-- extends="struts-default"改为extends="base-default",测试全局异常 -->
+    <package name="user-action" namespace="/nsfw" extends="base-default">
+    	
+    	<!-- 通配符 -->
+    	<action name="user_*" class="cn.itcast.nsfw.user.action.UserAction" method="{1}">
+    		<!-- 转发(路径不会变,导致刷新页面会再次实现增加操作)) -->
+    		<result name="{1}">/WEB-INF/jsp/nsfw/user/{1}.jsp</result>
+    		
+    		<!-- 重定向(路径会变) -->
+    		<result name="list" type="redirectAction">
+    			<param name="actionName">user_listUI</param>
+    			<!-- 传参(info.title):name不是action就会当成是参数结合在action中传到页面 -->
+    			<param name="user.name">${strName}</param>
+    			<!-- 传参(pageNo):name不是action就会当成是参数结合在action中传到页面 -->
+    			<param name="pageNo">${pageNo}</param>
+    			<!-- 解决中文乱码 -->
+    			<param name="encode">true</param>
+    		</result>
+    	</action>
+    </package>
+    
+
+</struts>

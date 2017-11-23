@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- name:实体类全限定名; table:数据库表名 -->
+	<class name="cn.itcast.nsfw.user.entity.UserRole" table="user_role">
+		
+		<!-- 联合主键属性 -->
+		<composite-id name="id" class="cn.itcast.nsfw.user.entity.UserRoleId">
+			<!-- 多对一；多:UserRoleId; 一:role -->
+			<key-many-to-one name="role" lazy="false" class="cn.itcast.nsfw.role.entity.Role">
+				<!-- 数据库字段名称 -->
+				<column name="role_id"></column>
+			</key-many-to-one>
+			
+			<!-- userId -->
+			<key-property name="userId" type="java.lang.String">
+				<!-- 数据库字段名称 -->
+				<column name="user_id" length="32"></column>
+			</key-property>
+			
+		</composite-id>		
+	</class>
+
+</hibernate-mapping>
+	

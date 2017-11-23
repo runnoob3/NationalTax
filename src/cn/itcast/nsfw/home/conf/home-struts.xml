@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<!-- extends="struts-default"改为extends="base-default" -->
+	<!-- 纳税服务子系统首页 -->
+    <package name="nsfwHome-action" namespace="/nsfw" extends="base-default">
+    	<!-- 通配符 -->
+    	<action name="home_*" class="cn.itcast.nsfw.home.action.HomeAction" method="{1}">
+    		<!-- 通配符 -->
+    		<result name="{1}">/WEB-INF/jsp/nsfw/home/{1}.jsp</result>
+    		
+    	</action>
+    </package>
+    
+
+</struts>

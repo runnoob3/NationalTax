@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<!-- extends="struts-default"改为extends="base-default" -->
+	<!-- 系统首页 -->
+    <package name="sysHome-action" namespace="/sys" extends="base-default">
+    	<!-- 通配符 -->
+    	<action name="home_*" class="cn.itcast.home.action.HomeAction" method="{1}">
+    		<!-- 因为HomeAction中没有定义hone的方法，所以单独配置一个返回结果 -->
+    		<result name="home">/WEB-INF/jsp/home/home.jsp</result>
+    		<!-- 通配符 -->
+    		<result name="{1}">/WEB-INF/jsp/home/{1}.jsp</result>
+    	</action>
+    </package>
+    
+    
+    <!-- 系统首页：我要投诉 -->
+    <package name="sysHomeJson-action" namespace="/sys" extends="json-default">
+    	<!-- 通配符 -->
+    	<action name="home_getUserJson2" class="cn.itcast.home.action.HomeAction" method="getUserJson2">
+    		<!-- 因为HomeAction中没有定义hone的方法，所以单独配置一个返回结果 -->
+    		<result type="json">
+    			<!-- 对应HomeAction中return_map -->
+    			<param name="root">return_map</param>
+    		</result>
+    	</action>
+    </package>
+    
+
+</struts>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<!-- extends="struts-default"改为extends="base-default",统计年度投诉数：继承json-default -->
+    <package name="complain-action" namespace="/nsfw" extends="base-default,json-default">
+    	
+    	<!-- 通配符 -->
+    	<action name="complain_*" class="cn.itcast.nsfw.complain.action.ComplainAction" method="{1}">
+    		<!-- 转发(路径不会变,导致刷新页面会再次实现增加操作)) -->
+    		<result name="{1}">/WEB-INF/jsp/nsfw/complain/{1}.jsp</result>
+    		
+    		<!-- 重定向(路径会变) -->
+    		<result name="list" type="redirectAction">
+    			<param name="actionName">complain_listUI</param>
+    			
+    			<!-- 传参:搜索条件回显 -->
+    			<!-- 传参(complain.name):name不是action就会当成是参数结合在action中传到页面 -->
+    			<!-- 投诉标题 -->
+    			<param name="complain.compTitle">${strTitle}</param>
+    			<!-- 状态 -->
+    			<param name="complain.state">${strState}</param>
+    			<!-- 开始时间 -->
+    			<param name="startTime">${startTime}</param>
+    			<!-- 结束时间 -->
+    			<param name="endTime">${endTime}</param>
+    			<!-- 当前页 -->
+    			<param name="pageNo">${pageNo}</param>
+    			
+    			<!-- 解决中文乱码 -->
+    			<param name="encode">true</param>
+    		</result>
+    		
+    		<!-- 统计年度投诉数,annualStatisticData:ComplainAction.java -->
+    		<result type="json" name="annualStatisticData">
+    			<!-- statisticMap:ComplainAction.java -->
+    			<param name="root">statisticMap</param>
+    		</result>
+    		
+    	</action>
+    </package>
+    
+
+</struts>

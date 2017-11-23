@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+		<class name="cn.itcast.nsfw.role.entity.Role" table="role">
+			<!-- id -->
+			<id name="roleId" type="java.lang.String">
+				<column name="role_id" length="32" />
+				<generator class="uuid.hex" />
+			</id>
+			
+			<!-- name：名称 -->
+			<property name="name" type="java.lang.String">
+				<column name="name" length="20" not-null="true" />
+			</property>
+			
+			<!-- state：状态 -->
+			<property name="state" type="java.lang.String">
+				<column name="state" length="1" />
+			</property>
+			
+			<!-- 权限的集合: 一对多 ; cascade级联添加-->
+			<set name="rolePrivileges" inverse="true" lazy="false" cascade="save-update,delete">
+				<key>
+					<column name="role_id"></column>
+				</key>
+				<one-to-many class="cn.itcast.nsfw.role.entity.RolePrivilege"/>
+			</set>
+	</class>
+</hibernate-mapping>
